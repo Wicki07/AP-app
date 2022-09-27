@@ -1,15 +1,16 @@
-import { createRouter, createWebHistory } from "vue-router";
-import ExampleComponent from "./components/ExampleComponent.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import TheMain from './components/TheMain.vue';
+import ExampleComponent from './components/ExampleComponent.vue';
 
 const router = createRouter({
-  history: createWebHistory("/"),
+  history: createWebHistory('/'),
   routes: [
     {
-      path: "/",
-      component: ExampleComponent,
+      path: '/',
+      component: TheMain,
     },
     {
-      path: "/home",
+      path: '/home',
       component: ExampleComponent,
     },
   ],
