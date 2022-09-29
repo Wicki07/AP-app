@@ -3,6 +3,9 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 const path = require('path');
 
+// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
+import vuetify from 'vite-plugin-vuetify';
+
 export default defineConfig({
   plugins: [
     laravel({
@@ -17,6 +20,7 @@ export default defineConfig({
         },
       },
     }),
+    vuetify(),
   ],
   resolve: {
     alias: {

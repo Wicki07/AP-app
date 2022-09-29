@@ -9,40 +9,77 @@
         alt="" />
       Akademia Pływania
     </a>
-    <div class="toggler">
+    <div class="toggler" @click="drawer = !drawer">
       <div class="toggler-item" />
       <div class="toggler-item" />
       <div class="toggler-item" />
     </div>
     <div class="collapse navbar-expand">
       <ul>
-        <li class="active">
-          <a class="" href="#">O nas</a>
+        <li :class="{ active: route.path === '/' }">
+          <a href="#" @click="() => redirect('/')">O nas</a>
+        </li>
+        <li :class="{ active: route.path === '/news' }">
+          <a href="#" @click="() => redirect('/news')">Aktualności</a>
         </li>
         <li>
-          <a class="" href="#">Aktualności</a>
-        </li>
-        <li class="dropdown">
-          <a class="" href="#">Ofera</a>
-          <div class="dropdown-menu">
-            <a href="#">Plan zajęć</a>
-            <a href="#">Cennik</a>
-            <a href="#">Obozy</a>
-          </div>
+          <a href="#" @click="() => redirect('/')">Ofera</a>
         </li>
         <li>
-          <a class="" href="#">Galeria</a>
+          <a href="#" @click="() => redirect('/')">Galeria</a>
         </li>
         <li>
-          <a class="" href="#">Kontakt</a>
+          <a href="#" @click="() => redirect('/')">Kontakt</a>
         </li>
       </ul>
     </div>
   </nav>
+  <v-navigation-drawer v-model="drawer" location="end" bottom temporary>
+    <ul class="drawer-ul">
+      <li class="active">
+        <a href="#" @click="() => redirect('/')">O nas</a>
+      </li>
+      <li>
+        <a href="#" @click="() => redirect('/news')">Aktualności</a>
+      </li>
+      <li>
+        <a href="#" @click="() => redirect('/')">Ofera</a>
+      </li>
+      <li>
+        <a href="#" @click="() => redirect('/')">Galeria</a>
+      </li>
+      <li>
+        <a href="#" @click="() => redirect('/')">Kontakt</a>
+      </li>
+    </ul>
+  </v-navigation-drawer>
 </template>
 
 <script>
-export default {};
+import { reactive, toRefs } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+export default {
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+
+    const initialState = {
+      drawer: false,
+    };
+
+    const data = reactive({ ...initialState });
+
+    const redirect = url => {
+      router.push(url);
+    };
+
+    return {
+      ...toRefs(data),
+      redirect,
+      route,
+    };
+  },
+};
 </script>
 <style scoped>
 ul {
@@ -57,7 +94,7 @@ ul {
 }
 ul li a {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-align: center;
   color: #454746;
   text-decoration: none;
@@ -81,6 +118,23 @@ ul li a:hover::before {
 }
 ul li.active a::before {
   transform: scaleX(1);
+}
+ul.drawer-ul {
+  list-style-type: none;
+  margin: 30px 0 0 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+ul.drawer-ul li {
+  margin-top: 15px;
+}
+ul.drawer-ul li a {
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 .navbar {
   display: flex;

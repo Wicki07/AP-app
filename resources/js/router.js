@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import TheMain from './components/TheMain.vue';
 import ExampleComponent from './components/ExampleComponent.vue';
+import TheMain from './TheMain.vue';
+import News from './components/News.vue';
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -8,6 +9,10 @@ const router = createRouter({
     {
       path: '/',
       component: TheMain,
+    },
+    {
+      path: '/news',
+      component: News,
     },
     {
       path: '/home',
